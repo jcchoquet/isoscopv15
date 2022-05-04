@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="isoscop_report_assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link href="/isoscop/static/src/scss/layout_boxed.scss" rel="stylesheet" type="text/scss"/>
+        </xpath>
+    </template>
+
+
+    <template id="isoscop_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@t-field='doc.partner_id']" position="replace">            
+            <div t-field="doc.partner_id" style="font-size:larger;" t-options='{"widget": "contact", "fields": ["address", "name", "phone", "mobile"], "no_marker": True, "phone_icons":true}' />
+        </xpath>
+
+        
+        
+        <xpath expr="//p[@t-field='doc.date_order']" position="replace">
+            <p class="m-0" t-field="doc.date_order" t-options ='{"format": "dd/MM/yyyy"}'/>
+        </xpath>
+
+        <xpath expr="//h2" position="before">
+            <t t-if="doc.company_id.id == 1">
+                <t t-set="style_fond" t-value="'background-color: rgba(21,101,192 ,1)'" />
+            </t>
+            <t t-if="doc.company_id.id == 2">
+                <t t-set="style_fond" t-value="'background-color: green'" />
+            </t>
+            <t t-if="doc.company_id.id == 3">
+                <t t-set="style_fond" t-value="'background-color: red'" />
+            </t>
+            
+            <t t-if="doc.company_id.id == 1">
+                <p></p>
+                <div class="text-center" style="color: LawnGreen;">
+                
+                <strong>ISOSCOP améliore l'isolation de votre maison, et réalise tous vos travaux d'isolations :</strong><br></br>
+                - Isolation par soufflage de ouate de cellulose<br></br>
+                - Isolation écologique - Chanvre/Lin/Coton - Fibre de bois<br></br>
+                - Aménagement de vos combles et de tous vos espaces de vie<br></br>
+                - ITEE : Isolation Thermique Extérieur Ecologique<br></br>
+                - Charpente - Couverture - Sarking - Extension bois<br></br>
+                </div>
+                <p></p>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@id='informations']" position="attributes">
+            <attribute name="class">row mt16 mb16</attribute>
+        </xpath>
+        
+        <xpath expr="//div[@id='informations']/div[6]" position="replace">
+            
+        </xpath>
+
+        <xpath expr="//table[hasclass('table','table-sm','o_main_table')]" postion="before">
+            <p>
+            <strong>Matériel(s) fourni(s) et mis en place par nos soins.</strong>
+            </p>
+        </xpath>
+
+        <xpath expr="//tbody[hasclass('sale_tbody')]//tr/t[2]/td" position="attributes">
+            <attribute name="t-att-style">style_fond</attribute>
+        </xpath>
+
+        <xpath expr="//div[@id='total']" position="before">
+            <div t-if="doc.company_id.id == 1" style="page-break-after: always;"></div>
+        </xpath>
+        
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[1]" position="attributes">
+            <attribute name="t-att-style">style_fond</attribute>
+        </xpath>
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[2]" position="attributes">
+            <attribute name="t-att-style">style_fond</attribute>
+        </xpath>
+        
+        <xpath expr="//tr[hasclass('is-subtotal','text-right')]" position="attributes">
+            <attribute name="t-if">current_subtotal_tax_excluded > 0</attribute>
+        </xpath>
+        
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]" position="inside">
+            <t t-set="reste_apayer" t-value="doc.amount_total - doc.primeCEE"/>
+            <tr t-if="doc.primeCEE > 0">
+                <td t-if="doc.company_id.id == 1">
+                    <strong style="color: red;" t-if="not is_engie">Prime CEE EDF</strong>
+                    <strong style="color: red;" t-if="is_engie">Montant Prime CEE</strong>
+                    <br></br>
+                    <cite><span t-field="doc.type_primeCEE"/></cite>
+                </td>
+                <td t-if="doc.company_id.id == 2"><strong>Prime CEE</strong>
+                </td>
+                <td class="text-right" style="color: red;">
+                    <span t-field="doc.primeCEE" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>                    
+                </td>
+            </tr>
+            <tr class="border-black">
+                <td t-att-style="style_fond"><strong>Reste à payer TTC</strong></td>
+                <td class="text-right" t-att-style="style_fond">
+                    <span t-esc="reste_apayer" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                </td>
+            </tr>
+        </xpath>
+
+        <xpath expr="//p[@t-field='doc.note']" position="before">
+            <p t-if="doc.company_id.id != 2">Devis gratuit valable 1 mois à compter de la date d'émission du devis.</p>
+            <p t-if="doc.company_id.id == 2">Les prix de nos devis sont valables 3 mois à compter de la date d'émission du devis, sauf accord particulier.</p>
+        </xpath>
+        
+        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="after">
+            <div class="clearfix">
+                <div id="terms" class="col-xs-4" t-if="doc.order_terms" style="width:30%">
+                    <table class="table table-sm">              
+                        <tr style="">
+                            <td><strong>Echéances</strong></td>
+                            <td></td>
+                        </tr>
+                        <t t-foreach="doc.order_terms" t-as="term">
+                            <tr class="border-black" style="">                       
+                                    <td>
+                                        <span t-esc="term.name"/>                               
+                                    </td>
+                                    <td class="text-right o_price_total">
+                                        <span t-esc="term.price_total" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                    </td>
+                                
+                            </tr>
+                        </t>
+                    </table>
+                    <t t-if="doc.company_id.id == 2">
+                      <br></br>
+                      <br></br>
+                    </t>
+                </div>        
+                
+                <div id="prime_cee" t-if="doc.primeCEE > 0" style="page-break-inside: avoid;">
+                    <cite>
+                    <t t-if="doc.company_id.id == 1">
+                        <t t-if="not is_engie">
+                        Tout ou partie des travaux relatifs à ce devis ou bon de commande sont éligibles à une prime d'un montant de <span t-field="doc.primeCEE"/> Euros
+                        dont EDF est à l'origine dans le cadre du dispositif des Certficats d'Economies d'Energie. Le montant de cette prime ne pourra être révisé à la baisse
+                        qu'en cas de modifications du volume de Certficats d'Economies d'Energie attaché à l'opération ou aux opérations d'économies d'énergie ou de la situation de précarité énergétique et ce, de manière proportionnelle.
+                        </t>
+                        <t t-if="is_engie">
+                        Prime d'incitation aux travaux d'économie d'énergie octroyée par ENGIE SA 542 107 651 dans le cadre des Certficats d'Economies d'Energie.
+                        Le client s'engage à céder ses droits CEE exclusivement à ENGIE SA qui l'accompagne dans la réalisation de travaux permettant de diminuer ses consommations d'énergie.
+                        </t>
+                    </t>
+                    <t t-if="doc.company_id.id == 2">
+                        <t t-if="not is_capital">
+                        Prime d'incitation aux travaux d'économie d'énergie octroyée par ENGIE SA 542 107 651 dans le cadre des Certificats d'Economies d'Energie.
+                        Le client s'engage à céder des droits CEE exclusivement à ENGIE SA qui l'accompagne dans la réalisation de travaux permettant de diminuer ses consommations d'énergie.
+                        </t>
+                        <t t-if="is_capital">
+                        Prime déduite et financée par Capital Energy d'un montant comme indiqué ci-dessus dans le cadre du dispositif des Certificats d'Economies d'Energie.
+                        </t>
+                    </t>
+                    </cite>
+                </div>
+                <div style="page-break-inside: avoid;">
+                    <p></p>
+                    <div class="col-xs-8 pull-left">
+                        <cite>
+                        <t t-if="doc.company_id.id == 1">Date de visite préalable :</t><t t-if="doc.company_id.id == 2">Date de la visite préalable du bâtiment où ont lieu les travaux :</t> <span t-field="doc.date_prior_visit"/><br></br>
+                        Nom et prénom des clients : <span t-field="doc.partner_id"/> <br></br>
+                        Type de chauffage : <span t-field="doc.type_heating"/> <br></br>
+                        Surface habitable : <span t-field="doc.livable_area"/> m²
+                        </cite>
+                    </div>            
+                    <div class="col-xs-8 pull-right" id="sign_customer" style="width:400px;">  
+                        <p>
+                    Date d'acceptation:<br></br>
+                    Signature précédée de la mention "Bon pour accord et exécution des travaux"
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        
+        </xpath>
+        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace"></xpath>
+        
+        
+    </template>
+    
+    <template id="isoscop_report_invoice_document" inherit_id="account.report_invoice_document">        
+        
+        <xpath expr="//div[@id='informations']" postion="inside">
+            <div name="reglement" class="col-auto mw-100 mb-2" t-if="o.payment_term_id">
+                <strong>Mode de règlement:</strong> 
+                    <p class="m-0" t-field="o.payment_term_id.note"/>
+            </div>
+            <div name="date_start_work" class="col-auto mw-100 mb-2" t-if="o.date_start_work">
+                <strong>Date début travaux:</strong> 
+                    <p class="m-0" t-field="o.date_start_work"/>
+            </div>
+            <t t-if="o.company_id.id == 1">
+                <t t-set="style_fond" t-value="'background-color: rgba(21,101,192 ,1)'" />
+            </t>
+            <t t-if="o.company_id.id == 2">
+                <t t-set="style_fond" t-value="'background-color: rgba(21,101,192 ,1)'" />
+            </t>
+            <t t-if="o.company_id.id == 3">
+                <t t-set="style_fond" t-value="'background-color: red'" />
+            </t>
+        </xpath>
+        <xpath expr="//table[@name='invoice_line_table']" postion="before">
+            <p>
+            <strong>Matériel(s) fourni(s) et mis en place par nos soins.</strong>
+            </p>
+            <p style="font-size:x-small;" t-if="o.date_prior_visit">      
+            Visite de chantier préalable effectuée le <span t-field="o.date_prior_visit" t-options ='{"format": "dd/MM/yyyy"}'/>
+            </p>
+        </xpath>
+
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]" position="inside">
+            <t t-set="reste_apayer" t-value="o.amount_total - o.primeCEE"/>
+            <tr t-if="o.primeCEE > 0">
+                
+                <td t-if="o.company_id.id == 1">
+                    <strong style="color: red;" t-if="not is_engie">Prime CEE EDF</strong>
+                    <strong style="color: red;" t-if="is_engie">Montant Prime CEE</strong>                      
+                </td>
+                <td t-if="o.company_id.id == 2"><strong>Prime CEE</strong>
+                </td>
+                
+                <td class="text-right" style="color: red;">
+                    <span t-field="o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+            </tr>
+            <tr class="border-black">
+                <td t-att-style="style_fond"><strong>Reste à payer TTC</strong></td>
+                <td class="text-right" t-att-style="style_fond">
+                    <span t-esc="reste_apayer" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+            </tr>
+        </xpath>
+            
+        <xpath expr="//tbody[hasclass('invoice_tbody')]//tr/t[2]/td" position="attributes">
+            <attribute name="t-att-style">style_fond</attribute>
+        </xpath>    
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[1]" position="attributes">
+            <attribute name="t-att-style">style_fond</attribute>
+        </xpath>
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[2]" position="attributes">
+            <attribute name="t-att-style">style_fond</attribute>
+        </xpath>
+        
+        <xpath expr="//p[@name='payment_term']" position="replace">
+        </xpath>
+        <xpath expr="//p[@name='comment']" position="before">
+                <p>Escompte pour règlement anticipé : 0%</p>
+            </xpath>
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <cite>
+            <p t-if="is_engie and o.company_id.id != 3">
+            Prime d'incitation aux travaux d'économie d'énergie octroyée par ENGIE SA 542 107 651 dans le cadre des Certficats d'Economies d'Energie.
+            Le client s'engage à céder ses droits CEE exclusivement à ENGIE SA qui l'accompagne dans la réalisation de travaux permettant de diminuer ses consommations d'énergie.
+            </p>
+            </cite>
+            <br></br>
+            <div class="col-xs-6 pull-left" id="talon" style="border:1px dotted black;font-size:xx-small;page-break-inside: avoid;">
+                <strong>Talon à joindre à votre règlement</strong>
+                <div class="col-xs-5">
+                <p>DATE: <span t-field="o.date_invoice"/>
+                <br>CLIENT : <span t-field="o.partner_id"/></br>
+                <br>N°FACTURE : <span t-field="o.number"/></br>
+                <br>NET A PAYER : <span t-esc="o.residual - o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></br>
+                </p>
+                </div>
+            </div>
+        </xpath>
+        
+        <xpath expr="//address[@t-field='o.partner_id']" position="attributes">
+            <attribute name="style">font-size:larger;</attribute>
+        </xpath>
+    </template> 
+    
+    <template id="isoscop_report_invoice_document_inherit_sale" inherit_id="sale.report_invoice_document_inherit_sale">        
+        <xpath expr="//div[@t-field='o.partner_id']" position="replace">            
+            <div t-field="o.partner_id" t-options="{'widget': 'contact', 'fields': ['address', 'name', 'phone', 'mobile'], 'no_marker': True, 'phone_icons':true}" groups="sale.group_delivery_invoice_address"/>
+        </xpath>
+    </template> 
+    
+    <template id="isoscop_report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">        
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//span[@t-field='o.residual']" position="replace">
+            <t t-set="reste_du" t-value="o.residual - o.primeCEE"/>
+            <span t-esc="reste_du"/>
+        </xpath>
+        
+        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//t[@t-set='payments_vals']" position="replace">
+            <t t-set="payments_vals" t-value="o._get_payments_vals_report()"/>
+        </xpath>
+    </template>
+
+    <template id="isoscop_external_layout_boxed" inherit_id="web.external_layout_boxed">
+        <xpath expr="//div[hasclass('header')]//div[hasclass('col-6')]" position="replace">
+            <div class="col-5">
+                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('header')]//div[hasclass('col-6','text-right','mb4')]" position="replace">
+            <div class="col-7 text-right mb4" >
+                <div class="col-xs-3 pull-left" style="padding-left:10px;width:280px;">
+                  <div class="col-xs-1 pull-left" style="width:80px;">
+                      <img src="/isoscop/static/src/img/rge.jpg" style="display: block;"/>
+                  </div>
+                  <div class="pull-left" style="width:70px;">
+                      <t t-if="company.id != 3">
+                          <img src="/isoscop/static/src/img/PEE_ENGIE.png" style="display: block;"/>
+                      </t>
+                  </div>
+                  <div class="pull-right" style="width:80px;">
+                      <t t-if="company.id == 1">
+                          <img src="/isoscop/static/src/img/logo_rse.png" style="display: block;"/>
+                      </t>
+                  </div>
+                </div>
+                <div class="col-xs-3 pull-right" style="width:180px;">
+                    <h4 class="mt0" t-field="company.report_header"/>
+                    <div name="company_address" class="mb4">
+                        <span class="company_address" t-field="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('header')]//h4[hasclass('mt0')]" position="attributes">
+            <attribute name="style">color: red;</attribute>
+        </xpath>
+        
+        <xpath expr="//div[@t-field='company.report_footer']" position="after">
+            <div t-if="company.id != 3">
+                Médiateur : MEDIMMOCONSO 1 allée du Parc de la Mesemena Bat A CS25222 44505 LA BAULE CEDEX
+                <br>https://medimmoconso.fr/adresser-une-reclamation/</br>
+            </div>
+        </xpath>
+    </template> 
+    
+    <template id="report_saleorder_engie">
+        <t t-call="web.html_container">
+            <t t-set="is_engie" t-value="True"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+    
+    <!-- <report  -->
+        <!-- id="sale_order_engie" -->
+        <!-- model="sale.order" -->
+        <!-- string="Devis / Commande Engie" -->
+        <!-- report_type="qweb-pdf" -->
+        <!-- name="isoscop.report_saleorder_engie" -->
+        <!-- file="isoscop.report_saleorder_engie"                 -->
+        <!-- print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s -%s' % (object.name, object.partner_id.name)) or 'Commande - %s -%s' % (object.name,object.partner_id.name)" -->
+    <!-- /> -->
+    
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="name">Devis / Commande Engie</field>
+        <field name="report_name">isoscop.report_saleorder_engie</field>
+        <field name="report_file">isoscop.report_saleorder_engie</field>        
+    </record>
+    
+    <template id="report_invoice_with_payments_engie">
+        <t t-call="web.html_container">
+            <t t-set="is_engie" t-value="True"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+    
+    <!-- <report -->
+        <!-- id="account_invoices_engie" -->
+        <!-- model="account.invoice" -->
+        <!-- string="Factures Engie" -->
+        <!-- report_type="qweb-pdf" -->
+        <!-- name="isoscop.report_invoice_with_payments_engie" -->
+        <!-- file="isoscop.report_invoice_with_payments_engie" -->
+        <!-- attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')" -->
+        <!-- print_report_name="(object._get_report_base_filename())"         -->
+    <!-- /> -->
+    
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="name">Factures Engie</field>
+        <field name="report_name">isoscop.report_invoice_with_payments_engie</field>
+        <field name="report_file">isoscop.report_invoice_with_payments_engie</field>        
+    </record>
+    
+    <template id="report_saleorder_capital">
+        <t t-call="web.html_container">
+            <t t-set="is_capital" t-value="True"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+    
+    <report 
+        id="sale_order_capital"
+        model="sale.order"
+        string="Devis / Commande Capital énergy"
+        report_type="qweb-pdf"
+        name="isoscop.report_saleorder_capital"
+        file="isoscop.report_saleorder_capital"                
+        print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s -%s' % (object.name, object.partner_id.name)) or 'Commande - %s -%s' % (object.name,object.partner_id.name)"      
+    />
+    
+    <!-- <record id="isoscop.account_invoices_engie" model="ir.actions.report"> -->
+        <!-- <field name="groups_id" eval="[(4,ref('isoscop.group_isoscop')),(4,ref('account.group_account_invoice'))]"/> -->
+    <!-- </record> -->
+    <!-- <record id="isoscop.sale_order_engie" model="ir.actions.report"> -->
+        <!-- <field name="groups_id" eval="[(4,ref('isoscop.group_isoscop'))]"/> -->
+    <!-- </record> -->
+    <record id="isoscop.sale_order_capital" model="ir.actions.report">
+        <field name="groups_id" eval="[(4,ref('isoscop.group_isrc'))]"/>
+    </record>
+</odoo>

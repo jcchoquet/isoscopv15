@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+    
+    <record id="isoscop_view_partner_form" model="ir.ui.view">
+        <field name="name">isoscop.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">            
+            <xpath expr="//div[hasclass('o_address_format')]/field[@name='zip']" position="replace"/>
+            
+            <xpath expr="//div[hasclass('o_address_format')]/field[@name='city']" position="before">
+                <field name="zip" placeholder="Code postal" class="o_address_zip" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" style="margin-right:2%;width: 23%;"/>
+            </xpath>
+        
+            <xpath expr="//notebook//div[hasclass('o_address_format')]/field[@name='zip']" position="replace"/>
+            
+            <xpath expr="//notebook//div[hasclass('o_address_format')]/field[@name='city']" position="before">
+                <field name="zip" placeholder="Code postal" class="o_address_zip" style="margin-right:2%;width: 23%;"/>
+            </xpath>
+        </field>
+    </record>
+
+    </data>
+</odoo>

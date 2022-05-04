@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_isoscop" model="res.groups">
+        <field name="name">Isoscop</field>
+    </record>
+    
+    <record id="group_isrc" model="res.groups">
+        <field name="name">Isrc</field>
+    </record>
+  
+
+</odoo>

@@ -1,0 +1,474 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * isoscop
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-12 18:02+0000\n"
+"PO-Revision-Date: 2020-03-12 18:02+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<br/>\n"
+"                        Nom et prénom des clients :"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<br/>\n"
+"                        Surface habitable :"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<br/>\n"
+"                        Type de chauffage :"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.res_config_settings_wizard_isoscop
+msgid "<span class=\"searchIcon\"><i class=\"fa fa-search\" role=\"img\" aria-label=\"Search\" title=\"Search\"/></span>"
+msgstr "<span class=\"searchIcon\"><i class=\"fa fa-search\" role=\"img\" aria-label=\"Recherche\" title=\"Recherche\"/></span>"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<strong>Echéances</strong>"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<strong>ISOSCOP améliore l'isolation de votre maison, et réalise tous vos travaux d'isolations :</strong><br/>\n"
+"                - Isolation par soufflage de ouate de cellulose<br/>\n"
+"                - Isolation écologique - Chanvre/Lin/Coton - Fibre de bois<br/>\n"
+"                - Aménagement de vos combles et de tous vos espaces de vie<br/>\n"
+"                - ITEE : Isolation Thermique Extérieur Ecologique<br/>\n"
+"                - Charpente - Couverture - Sarking - Extension bois<br/>"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "<strong>Mode de règlement:</strong>"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<strong>Prime CEE EDF</strong><br/>"
+msgstr "<strong>Prime CEE</strong><br/>"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "<strong>Prime CEE</strong>"
+msgstr "<strong>Prime CEE</strong>"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<strong>Prime CEE</strong><br/>\n"
+"                    <cite>Coup de pouce</cite>"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "<strong>Reste à payer TTC</strong>"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "<strong>Talon à joindre à votre règlement</strong>"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.omega_sale_sale_view_form
+msgid "Ajouter échéance"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.res_config_settings_wizard_isoscop
+msgid "Annuler"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Autre"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Bois"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "CLIENT :"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Combustible"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_template__company_id
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_template_line__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: isoscop
+#: model:ir.actions.act_window,name:isoscop.action_isoscop_wizard_res_config_menu
+msgid "Configuration"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_primeCEE:0
+msgid "Coup de pouce grande précarité "
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_primeCEE:0
+msgid "Coup de pouce non precaire "
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_primeCEE:0
+msgid "Coup de pouce precarité"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:16
+#, python-format
+msgid "Credit Note"
+msgstr "Avoir"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:17
+#, python-format
+msgid "Credit Note - %s - %s"
+msgstr "Avoir - %s - %s"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "DATE:"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Date :<br/>\n"
+"                    Signature précédée de la mention \"Bon pour accord et exécution des travaux\""
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Date de la visite préalable du bâtiment où ont lieu les travaux :"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_account_invoice__date_prior_visit
+#: model:ir.model.fields,field_description:isoscop.field_sale_order__date_prior_visit
+msgid "Date de visite préalable"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Date de visite préalable :"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.ui.menu,name:isoscop.isoscop_wizard_res_config_menu
+msgid "Date limite pour lettrage"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Devis gratuit valable 3 mois à compter de la date d'émission du devis."
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:14
+#, python-format
+msgid "Draft Invoice"
+msgstr "Facture en brouillon"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order__order_terms
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__name
+#: model_terms:ir.ui.view,arch_db:isoscop.omega_sale_sale_view_form
+msgid "Echéances"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Electricité"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Eléctrique"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "Escompte pour règlement anticipé : 0%"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Euros\n"
+"                    dont EDF est à l'origine dans le cadre du dispositif des Certficats d'Economies d'Energie. Le montant de cette prime ne pourra être révisé à la baisse\n"
+"                    qu'en cas de modifications du volume de Certficats d'Economies d'Energie attaché à l'opération ou aux opérations d'économies d'énergie ou de la situation de précarité énergétique et ce, de manière proportionnelle."
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Fioul"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Gaz naturel"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,help:isoscop.field_sale_order_terms__sequence
+msgid "Gives the sequence order when displaying a list of optional products."
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_primeCEE:0
+msgid "Grande précarité"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__id
+msgid "ID"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:15
+#, python-format
+msgid "Invoice - %s - %s"
+msgstr "Facture - %s - %s"
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.res_config_settings_wizard_isoscop
+msgid "Les paiements qui n'ont pas été rapprochés avec un paiment ne seront pas montrés s'ils ont été fait avant cette date."
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Les prix de nos devis sont valables 3 mois à compter de la date d'émission du devis, sauf accord particulier."
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "NET A PAYER :"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_primeCEE:0
+msgid "Non precaire"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "N°FACTURE :"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.res_config_settings_wizard_isoscop
+msgid "Paramétrage"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_account_invoice__primeCEE
+#: model:ir.model.fields,field_description:isoscop.field_sale_order__primeCEE
+msgid "Prime CEE"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Prime d'incitation aux travaux d'économie d'énergie octroyée par ENGIE SA dans le cadre des Certificats d'Economies d'Energie.\n"
+"                    Le client s'engage à céder des droits CEE exclusivement à ENGIE SA qui l'accompagne dans la réalisation de travaux permettant de diminuer ses consommations d'énergie."
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: isoscop
+#: selection:sale.order,type_heating:0
+msgid "Propane"
+msgstr ""
+
+#. module: isoscop
+#: selection:sale.order,type_primeCEE:0
+msgid "Précarité"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_sale_order_template
+msgid "Quotation Template"
+msgstr "Modèle de devis"
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_sale_order_template_line
+msgid "Quotation Template Line"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_sale_order
+msgid "Sale Order"
+msgstr "Bon de commande"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__order_id
+msgid "Sales Order Reference"
+msgstr "Référence du bon de commande"
+
+#. module: isoscop
+#: model:ir.model,name:isoscop.model_sale_order_terms
+msgid "Sales Order Terms"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.res_config_settings_wizard_isoscop
+msgid "Sauvegarder"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.res_config_settings_wizard_isoscop
+msgid "Search..."
+msgstr "Recherche…"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order__livable_area
+msgid "Surface habitable"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__rate
+msgid "Taux"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order_terms__price_total
+msgid "Total"
+msgstr ""
+
+#. module: isoscop
+#: constraint:sale.order.terms:0
+msgid "Total des échéances > 100%"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "Tout ou partie des travaux relatifs à ce devis ou bon de commande sont éligibles à une prime d'un montant de"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order__type_heating
+msgid "Type de chauffage"
+msgstr ""
+
+#. module: isoscop
+#: model:ir.model.fields,field_description:isoscop.field_sale_order__type_primeCEE
+msgid "Type de prime"
+msgstr ""
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:18
+#, python-format
+msgid "Vendor Bill"
+msgstr "Facture fournisseur"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:19
+#, python-format
+msgid "Vendor Bill - %s - %s"
+msgstr "Facture fournisseur - %s - %s"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:20
+#, python-format
+msgid "Vendor Credit Note"
+msgstr "Avoir de fournisseur"
+
+#. module: isoscop
+#: code:addons/isoscop/models/invoice.py:21
+#, python-format
+msgid "Vendor Credit Note - %s - %s"
+msgstr "Avoir de fournisseur - %s - %s"
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_invoice_document
+msgid "Visite de chantier préalable effectuée le"
+msgstr ""
+
+#. module: isoscop
+#: model_terms:ir.ui.view,arch_db:isoscop.isoscop_report_saleorder_document
+msgid "m²"
+msgstr ""
+

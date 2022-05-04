@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="res_config_settings_wizard_isoscop" model="ir.ui.view">
+        <field name="name">res.config.settings.wizard.isoscop</field>
+        <field name="model">res.config.settings</field>
+                <!-- <field name="inherit_id" ref="base.res_config_settings_view_form"/> -->
+        <field name="arch" type="xml">
+            <form string="Paramétrage" class="oe_form_configuration o_base_settings" >
+                <div class="o_control_panel">
+                    <div class="o_panel">
+                        <div class="title h2 mb0 mt4 text-muted d-none d-md-block">Paramétrage</div>
+                        <div class="o_setting_search">
+                            <input type="text" class="searchInput" placeholder="Search..."/>
+                            <span class="searchIcon"><i class="fa fa-search" role="img" aria-label="Search" title="Search"/></span>
+                        </div>
+                    </div>
+                    <header>
+                        <button string="Sauvegarder" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Annuler" type="object" name="cancel" special="cancel"/>
+                    </header>
+                </div>
+                <div class="o_setting_container">
+                    <div class="settings_tab"/>
+                    <div class="settings">
+                        <t groups="account.group_account_user">
+                        <h2>Paramétrage</h2>
+                        <div class="row mt16 o_settings_container" id="setup">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <div class="text-muted">
+                                        Les paiements qui n'ont pas été rapprochés avec un paiment ne seront pas montrés s'ils ont été fait avant cette date.                                       
+                                    </div>
+                                    <field name="account_bank_reconciliation_start"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    </div>
+                </div>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="action_isoscop_wizard_res_config_menu" model="ir.actions.act_window">
+        <field name="name">Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="res_config_settings_wizard_isoscop"/>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'account'}</field>
+    </record>
+    
+    <menuitem id="isoscop_wizard_res_config_menu" 
+          name="Date limite pour lettrage"
+          action="isoscop.action_isoscop_wizard_res_config_menu"
+          sequence="10"
+          parent="account.menu_finance_entries"/>
+    </data>
+</odoo>

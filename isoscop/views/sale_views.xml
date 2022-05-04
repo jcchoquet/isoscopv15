@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+    
+    <record id="omega_sale_sale_view_form" model="ir.ui.view">
+        <field name="name">omega.sale.sale.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//group[@name='sale_total']" position="after">
+                <group name="primecee">
+                    <group>
+                        <field name="primeCEE" widget="monetary"/>
+                        <field name="type_primeCEE" attrs="{'invisible': [('company_id', '!=', 1)]}"/>
+                    </group>                    
+                </group>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/.." position="after">
+                <page string="Echéances">
+                    <field name="order_terms">
+                        <tree string="Echéances" editable="bottom">
+                            <control>
+                                <create string="Ajouter échéance"/>
+                            </control>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="rate"/>
+                            <field name="price_total"/>
+                            <field name="currency_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="date_prior_visit"/>
+                <field name="type_heating"/>
+                <field name="livable_area"/>
+            </xpath>
+            <xpath expr="//button[@name = 'preview_sale_order']" position="replace">
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="sale_order_template_view_form_isoscop" model="ir.ui.view">
+        <field name="name">sale.order.template.form.isoscop</field>
+        <field name="model">sale.order.template</field>
+        <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='number_of_days']" position="after">
+                <field name="company_id"/>
+            </xpath>
+        </field>
+    </record>
+    
+  </data>
+</odoo>

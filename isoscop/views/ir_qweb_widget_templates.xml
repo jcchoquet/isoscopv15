@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <template id="contact_name_isoscop" inherit_id="base.contact_name">
+        <xpath expr="//t[@t-if='object.name']" position="before">
+            <t t-if="object.title">
+                <span itemprop="title" t-esc="object.title.shortcut"/>
+            </t>
+        </xpath>
+    </template>
+</data>
+</odoo>
