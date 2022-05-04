@@ -12,6 +12,6 @@
     "installable": True,
     "application": False,
     "development_status": "Production/Stable",
-    "maintainers": ["pedrobaeza"],
+    "maintainers": ["pedrobaeza"], 
     #"external_dependencies": {"python": ["odoo-test-helper"]},
 }
