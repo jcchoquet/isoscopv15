@@ -23,7 +23,7 @@ class AccountInvoice(models.Model):
                 
     @api.onchange('invoice_line_ids')
     def load_section_product(self):
-        new_lines = self.env['account.invoice.line']
+        new_lines = self.env['account.move.line']
         for line in self.invoice_line_ids:
             if line.product_id.layout_category and line.display_type not in ('line_section', 'line_note'):
                 section_ids = self.invoice_line_ids.filtered(lambda x: x.display_type == 'line_section' and x.name == line.product_id.layout_category)
@@ -35,7 +35,7 @@ class AccountInvoice(models.Model):
                             'display_type': 'line_section'
                         }
                                     
-                    new_line = self.env['account.invoice.line'].new(datas)                    
+                    new_line = self.env['account.move.line'].new(datas)
                     new_lines += new_line
             
             self.update({'invoice_line_ids': self.invoice_line_ids | new_lines})
