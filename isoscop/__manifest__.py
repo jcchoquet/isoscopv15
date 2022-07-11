@@ -37,7 +37,7 @@
         'views/partner_views.xml',
         'views/product_template.xml',
         'views/ir_qweb_widget_templates.xml',       
-        'wizard/res_config_settings_views.xml',
+        # 'wizard/res_config_settings_views.xml',
         #report
         'report/report_template.xml',
         
