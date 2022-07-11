@@ -105,7 +105,7 @@
             <p t-if="doc.company_id.id == 2">Les prix de nos devis sont valables 3 mois à compter de la date d'émission du devis, sauf accord particulier.</p>
         </xpath>
         
-        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="after">
+        <xpath expr="//p[@t-if='not is_html_empty(doc.payment_term_id.note)']" position="after">
             <div class="clearfix">
                 <div id="terms" class="col-xs-4" t-if="doc.order_terms" style="width:30%">
                     <table class="table table-sm">              
@@ -176,7 +176,7 @@
             </div>
         
         </xpath>
-        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace"></xpath>
+        <xpath expr="//span[@t-field='doc.payment_term_id.note']" position="replace"></xpath>
         
         
     </template>
