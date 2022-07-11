@@ -286,9 +286,9 @@
             <span t-esc="reste_du"/>
         </xpath>
         
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//t[@t-set='payments_vals']" position="replace">
-            <t t-set="payments_vals" t-value="o._get_payments_vals_report()"/>
-        </xpath>
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//t[@t-set='payments_vals']" position="replace">-->
+<!--            <t t-set="payments_vals" t-value="o._get_payments_vals_report()"/>-->
+<!--        </xpath>-->
     </template>
 
     <template id="isoscop_external_layout_boxed" inherit_id="web.external_layout_boxed">
