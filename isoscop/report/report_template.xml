@@ -246,9 +246,9 @@
         
         <xpath expr="//p[@name='payment_term']" position="replace">
         </xpath>
-        <xpath expr="//p[@name='comment']" position="before">
+        <xpath expr="//div[@name='comment']" position="before">
                 <p>Escompte pour règlement anticipé : 0%</p>
-            </xpath>
+        </xpath>
         <xpath expr="//div[hasclass('page')]" position="inside">
             <cite>
             <p t-if="is_engie and o.company_id.id != 3">
