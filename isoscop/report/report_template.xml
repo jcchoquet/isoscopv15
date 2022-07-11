@@ -74,7 +74,7 @@
 <!--        </xpath>-->
         
         <xpath expr="//tr[hasclass('is-subtotal','text-right')]" position="attributes">
-            <attribute name="t-if">current_subtotal_tax_excluded > 0</attribute>
+            <attribute name="t-if">current_subtotal > 0</attribute>
         </xpath>
         
         <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]" position="inside">
