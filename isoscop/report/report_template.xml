@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    <template id="isoscop_report_assets" inherit_id="web.report_assets_common">-->
-<!--        <xpath expr="." position="inside">-->
-<!--            <link href="/isoscop/static/src/scss/layout_boxed.scss" rel="stylesheet" type="text/scss"/>-->
-<!--        </xpath>-->
-<!--    </template>-->
-
-
     <template id="isoscop_report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//div[@t-field='doc.partner_id']" position="replace">            
             <div t-field="doc.partner_id" style="font-size:larger;" t-options='{"widget": "contact", "fields": ["address", "name", "phone", "mobile"], "no_marker": True, "phone_icons":true}' />
@@ -184,9 +177,9 @@
     <template id="isoscop_report_invoice_document" inherit_id="account.report_invoice_document">        
         
         <xpath expr="//div[@id='informations']" postion="inside">
-            <div name="reglement" class="col-auto mw-100 mb-2" t-if="o.payment_term_id">
+            <div name="reglement" class="col-auto mw-100 mb-2" t-if="o.invoice_payment_term_id">
                 <strong>Mode de règlement:</strong> 
-                    <p class="m-0" t-field="o.payment_term_id.note"/>
+                    <p class="m-0" t-field="o.invoice_payment_term_id.note"/>
             </div>
             <div name="date_start_work" class="col-auto mw-100 mb-2" t-if="o.date_start_work">
                 <strong>Date début travaux:</strong> 
@@ -260,10 +253,10 @@
             <div class="col-xs-6 pull-left" id="talon" style="border:1px dotted black;font-size:xx-small;page-break-inside: avoid;">
                 <strong>Talon à joindre à votre règlement</strong>
                 <div class="col-xs-5">
-                <p>DATE: <span t-field="o.date_invoice"/>
+                <p>DATE: <span t-field="o.invoice_date"/>
                 <br>CLIENT : <span t-field="o.partner_id"/></br>
-                <br>N°FACTURE : <span t-field="o.number"/></br>
-                <br>NET A PAYER : <span t-esc="o.residual - o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></br>
+                <br>N°FACTURE : <span t-field="o.name"/></br>
+                <br>NET A PAYER : <span t-esc="o.amount_residual - o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></br>
                 </p>
                 </div>
             </div>
@@ -299,7 +292,7 @@
         </xpath>
         <xpath expr="//div[hasclass('o_boxed_header')]//div[hasclass('col-6','text-right','mb4')]" position="replace">
             <div class="col-7 text-right mb4" >
-                <div class="col-xs-3 pull-left" style="padding-left:10px;width:280px;">
+                <div class="col-xs-3 pull-left" style="padding-left:10px;width:270px;">
                   <div class="col-xs-1 pull-left" style="width:80px;">
                       <img src="/isoscop/static/src/img/rge.jpg" style="display: block;"/>
                   </div>
@@ -314,16 +307,13 @@
                       </t>
                   </div>
                 </div>
-                <div class="col-xs-3 pull-right" style="width:180px;">
-                    <h4 class="mt0" t-field="company.report_header"/>
-                    <div name="company_address" class="mb4">
-                        <span class="company_address" t-field="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                <div class="col-xs-3 pull-right" style="width:190px;">
+                    <h4 class="mt0" t-field="company.report_header" style="color: red;"/>
+                    <div name="company_address" class="float-right mb4">
+                        <span t-if="company.company_details" t-field="company.company_details"/>
                     </div>
                 </div>
             </div>
-        </xpath>
-        <xpath expr="//div[hasclass('o_boxed_header')]//h4[hasclass('mt0')]" position="attributes">
-            <attribute name="style">color: red;</attribute>
         </xpath>
         
         <xpath expr="//div[@t-field='company.report_footer']" position="after">

@@ -10,16 +10,16 @@ class AccountInvoice(models.Model):
     date_prior_visit = fields.Date('Date de visite préalable')
     date_start_work = fields.Date('Date de début des travaux')
 
-    def _get_report_base_filename(self):
-        self.ensure_one()
-        return  self.type == 'out_invoice' and self.state == 'draft' and _('Draft Invoice') or \
-                self.type == 'out_invoice' and self.state in ('open','in_payment','paid') and _('Invoice - %s - %s') % (self.number, self.partner_id.name) or \
-                self.type == 'out_refund' and self.state == 'draft' and _('Credit Note') or \
-                self.type == 'out_refund' and _('Credit Note - %s - %s') % (self.number, self.partner_id.name) or \
-                self.type == 'in_invoice' and self.state == 'draft' and _('Vendor Bill') or \
-                self.type == 'in_invoice' and self.state in ('open','in_payment','paid') and _('Vendor Bill - %s - %s') % (self.number, self.partner_id.name) or \
-                self.type == 'in_refund' and self.state == 'draft' and _('Vendor Credit Note') or \
-                self.type == 'in_refund' and _('Vendor Credit Note - %s - %s') % (self.number, self.partner_id.name)
+    # def _get_report_base_filename(self):
+    #     self.ensure_one()
+    #     return  self.invoice_type == 'out_invoice' and self.state == 'draft' and _('Draft Invoice') or \
+    #             self.invoice_type == 'out_invoice' and self.state in ('open','in_payment','paid') and _('Invoice - %s - %s') % (self.number, self.partner_id.name) or \
+    #             self.invoice_type == 'out_refund' and self.state == 'draft' and _('Credit Note') or \
+    #             self.type == 'out_refund' and _('Credit Note - %s - %s') % (self.number, self.partner_id.name) or \
+    #             self.type == 'in_invoice' and self.state == 'draft' and _('Vendor Bill') or \
+    #             self.type == 'in_invoice' and self.state in ('open','in_payment','paid') and _('Vendor Bill - %s - %s') % (self.number, self.partner_id.name) or \
+    #             self.type == 'in_refund' and self.state == 'draft' and _('Vendor Credit Note') or \
+    #             self.type == 'in_refund' and _('Vendor Credit Note - %s - %s') % (self.number, self.partner_id.name)
                 
     @api.onchange('invoice_line_ids')
     def load_section_product(self):
