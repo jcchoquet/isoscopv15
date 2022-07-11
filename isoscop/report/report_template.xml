@@ -48,9 +48,9 @@
             <attribute name="class">row mt16 mb16</attribute>
         </xpath>
         
-        <xpath expr="//div[@id='informations']/div[6]" position="replace">
-            
-        </xpath>
+<!--        <xpath expr="//div[@id='informations']/div[6]" position="replace">-->
+<!--            -->
+<!--        </xpath>-->
 
         <xpath expr="//table[hasclass('table','table-sm','o_main_table')]" postion="before">
             <p>
