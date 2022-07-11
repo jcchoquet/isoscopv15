@@ -1,12 +1,12 @@
 <odoo>
   <data>
     
-    <record id="omega_invoice_form" model="ir.ui.view">
+    <record id="isoscop_invoice_form" model="ir.ui.view">
         <field name="name">omega.account.invoice.form</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//notebook//field[@name='comment']" position="before">
+            <xpath expr="//notebook//field[@name='narration']" position="before">
                 <group name="primecee">
                     <group>
                         <field name="primeCEE" widget="monetary"/>
@@ -17,28 +17,28 @@
             <xpath expr="//button[@name='preview_invoice']" position="replace">
             </xpath>
 			
-			<xpath expr="//field[@name='team_id']" position="after">
+			<xpath expr="//group[@id='header_right_group']" position="inside">
                 <field name="date_prior_visit"/>
                 <field name="date_start_work"/>
             </xpath>
         </field>
     </record>
     
-    <record id="isoscop_invoice_supplier_tree" model="ir.ui.view">
-        <field name="name">isoscop.account.invoice.supplier.tree</field>
-        <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.invoice_supplier_tree"/>
-        <field name="arch" type="xml">
-            <field name="origin" position="after">
-                <field name="payment_term_id"/>
-            </field>
-        </field>
-    </record>
+<!--    <record id="isoscop_invoice_supplier_tree" model="ir.ui.view">-->
+<!--        <field name="name">isoscop.account.invoice.supplier.tree</field>-->
+<!--        <field name="model">account.move</field>-->
+<!--        <field name="inherit_id" ref="account.view_invoice_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="origin" position="after">-->
+<!--                <field name="payment_term_id"/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
     
     <record id="isoscop_invoice_tree" model="ir.ui.view">
         <field name="name">isoscop.account.invoice.tree</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.invoice_tree"/>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
             <field name="origin" position="after">
                 <field name="payment_term_id"/>
@@ -50,7 +50,7 @@
     <record id="isoscop_invoice_supplier_form" model="ir.ui.view">
         <field name="name">isoscop.account.invoice.supplier.form</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
                 <field name="payment_term_id"/>
