@@ -66,12 +66,12 @@
             <div t-if="doc.company_id.id == 1" style="page-break-after: always;"></div>
         </xpath>
         
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[1]" position="attributes">
-            <attribute name="t-att-style">style_fond</attribute>
-        </xpath>
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[2]" position="attributes">
-            <attribute name="t-att-style">style_fond</attribute>
-        </xpath>
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[1]" position="attributes">-->
+<!--            <attribute name="t-att-style">style_fond</attribute>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[2]" position="attributes">-->
+<!--            <attribute name="t-att-style">style_fond</attribute>-->
+<!--        </xpath>-->
         
         <xpath expr="//tr[hasclass('is-subtotal','text-right')]" position="attributes">
             <attribute name="t-if">current_subtotal_tax_excluded > 0</attribute>
