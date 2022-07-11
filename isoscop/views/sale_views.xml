@@ -6,13 +6,9 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//notebook//group[@name='sale_total']" position="before">
-                <group name="primecee">
-                    <group>
+            <xpath expr="//notebook//field[@name='note']" position="before">
                         <field name="primeCEE" widget="monetary"/>
                         <field name="type_primeCEE" attrs="{'invisible': [('company_id', '!=', 1)]}"/>
-                    </group>                    
-                </group>
             </xpath>
             <xpath expr="//page/field[@name='order_line']/.." position="after">
                 <page string="Echéances">
