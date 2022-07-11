@@ -10,7 +10,6 @@ class AccountInvoice(models.Model):
     date_prior_visit = fields.Date('Date de visite préalable')
     date_start_work = fields.Date('Date de début des travaux')
 
-    @api.multi
     def _get_report_base_filename(self):
         self.ensure_one()
         return  self.type == 'out_invoice' and self.state == 'draft' and _('Draft Invoice') or \

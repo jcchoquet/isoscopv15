@@ -19,7 +19,6 @@ class SaleOrder(models.Model):
     livable_area = fields.Integer('Surface habitable')
     type_primeCEE = fields.Selection([('cp_non_precaire', 'Coup de pouce non precaire '),('cp_precarite', 'Coup de pouce precarité'),('cp_grande_precarite', 'Coup de pouce grande précarité '), ('non_precaire','Non precaire'), ('precarite','Précarité'), ('grande_precarite','Grande précarité')],string='Type de prime')
      
-    @api.multi
     def _prepare_invoice(self):
         invoice_vals = result = super(SaleOrder, self)._prepare_invoice()
         invoice_vals['primeCEE'] = self.primeCEE
@@ -61,7 +60,6 @@ class SaleOrderTerm(models.Model):
     currency_id = fields.Many2one(related='order_id.currency_id', depends=['order_id.currency_id'], store=True, string='Currency', readonly=True, copy=True)
     sequence = fields.Integer('Sequence', help="Gives the sequence order when displaying a list of optional products.")
     
-    @api.multi
     def _check_total_term(self):
         total = 0.0
         for term in self:
