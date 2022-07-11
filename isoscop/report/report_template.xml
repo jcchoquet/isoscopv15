@@ -334,14 +334,14 @@
         </xpath>
     </template> 
     
-    <template id="report_saleorder_engie">
-        <t t-call="web.html_container">
-            <t t-set="is_engie" t-value="True"/>
-            <t t-foreach="docs" t-as="doc">
-                <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
-            </t>
-        </t>
-    </template>
+<!--    <template id="report_saleorder_engie">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-set="is_engie" t-value="True"/>-->
+<!--            <t t-foreach="docs" t-as="doc">-->
+<!--                <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
     
     <!-- <report  -->
         <!-- id="sale_order_engie" -->
@@ -353,21 +353,21 @@
         <!-- print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s -%s' % (object.name, object.partner_id.name)) or 'Commande - %s -%s' % (object.name,object.partner_id.name)" -->
     <!-- /> -->
     
-    <record id="sale.action_report_saleorder" model="ir.actions.report">
-        <field name="name">Devis / Commande Engie</field>
-        <field name="report_name">isoscop.report_saleorder_engie</field>
-        <field name="report_file">isoscop.report_saleorder_engie</field>        
-    </record>
-    
-    <template id="report_invoice_with_payments_engie">
-        <t t-call="web.html_container">
-            <t t-set="is_engie" t-value="True"/>
-            <t t-foreach="docs" t-as="o">
-                <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
-                <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>
-            </t>
-        </t>
-    </template>
+<!--    <record id="sale.action_report_saleorder" model="ir.actions.report">-->
+<!--        <field name="name">Devis / Commande Engie</field>-->
+<!--        <field name="report_name">isoscop.report_saleorder_engie</field>-->
+<!--        <field name="report_file">isoscop.report_saleorder_engie</field>        -->
+<!--    </record>-->
+<!--    -->
+<!--    <template id="report_invoice_with_payments_engie">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-set="is_engie" t-value="True"/>-->
+<!--            <t t-foreach="docs" t-as="o">-->
+<!--                <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>-->
+<!--                <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
     
     <!-- <report -->
         <!-- id="account_invoices_engie" -->
