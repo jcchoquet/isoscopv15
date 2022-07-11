@@ -45,7 +45,6 @@ class IsoscopAccountMoveReport(models.Model):
 
         return """%s (SELECT %s FROM %s WHERE (aa.code like '7%%' or aa.code like '6%%') GROUP BY %s)""" % (with_, select_, from_, groupby_)
     
-    @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
         self.env.cr.execute("""CREATE or REPLACE VIEW %s as (%s)""" % (self._table, self._query()))

@@ -4,26 +4,26 @@ from odoo import models, fields, api, _
 from odoo.tools import float_is_zero
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     primeCEE = fields.Float('Prime CEE')
     date_prior_visit = fields.Date('Date de visite préalable')
     date_start_work = fields.Date('Date de début des travaux')
 
-    def _get_report_base_filename(self):
-        self.ensure_one()
-        return  self.type == 'out_invoice' and self.state == 'draft' and _('Draft Invoice') or \
-                self.type == 'out_invoice' and self.state in ('open','in_payment','paid') and _('Invoice - %s - %s') % (self.number, self.partner_id.name) or \
-                self.type == 'out_refund' and self.state == 'draft' and _('Credit Note') or \
-                self.type == 'out_refund' and _('Credit Note - %s - %s') % (self.number, self.partner_id.name) or \
-                self.type == 'in_invoice' and self.state == 'draft' and _('Vendor Bill') or \
-                self.type == 'in_invoice' and self.state in ('open','in_payment','paid') and _('Vendor Bill - %s - %s') % (self.number, self.partner_id.name) or \
-                self.type == 'in_refund' and self.state == 'draft' and _('Vendor Credit Note') or \
-                self.type == 'in_refund' and _('Vendor Credit Note - %s - %s') % (self.number, self.partner_id.name)
+    # def _get_report_base_filename(self):
+    #     self.ensure_one()
+    #     return  self.invoice_type == 'out_invoice' and self.state == 'draft' and _('Draft Invoice') or \
+    #             self.invoice_type == 'out_invoice' and self.state in ('open','in_payment','paid') and _('Invoice - %s - %s') % (self.number, self.partner_id.name) or \
+    #             self.invoice_type == 'out_refund' and self.state == 'draft' and _('Credit Note') or \
+    #             self.type == 'out_refund' and _('Credit Note - %s - %s') % (self.number, self.partner_id.name) or \
+    #             self.type == 'in_invoice' and self.state == 'draft' and _('Vendor Bill') or \
+    #             self.type == 'in_invoice' and self.state in ('open','in_payment','paid') and _('Vendor Bill - %s - %s') % (self.number, self.partner_id.name) or \
+    #             self.type == 'in_refund' and self.state == 'draft' and _('Vendor Credit Note') or \
+    #             self.type == 'in_refund' and _('Vendor Credit Note - %s - %s') % (self.number, self.partner_id.name)
                 
     @api.onchange('invoice_line_ids')
     def load_section_product(self):
-        new_lines = self.env['account.invoice.line']
+        new_lines = self.env['account.move.line']
         for line in self.invoice_line_ids:
             if line.product_id.layout_category and line.display_type not in ('line_section', 'line_note'):
                 section_ids = self.invoice_line_ids.filtered(lambda x: x.display_type == 'line_section' and x.name == line.product_id.layout_category)
@@ -35,7 +35,7 @@ class AccountInvoice(models.Model):
                             'display_type': 'line_section'
                         }
                                     
-                    new_line = self.env['account.invoice.line'].new(datas)                    
+                    new_line = self.env['account.move.line'].new(datas)
                     new_lines += new_line
             
             self.update({'invoice_line_ids': self.invoice_line_ids | new_lines})
