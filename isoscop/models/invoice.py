@@ -4,7 +4,7 @@ from odoo import models, fields, api, _
 from odoo.tools import float_is_zero
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     primeCEE = fields.Float('Prime CEE')
     date_prior_visit = fields.Date('Date de visite préalable')
