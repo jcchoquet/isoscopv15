@@ -92,9 +92,9 @@
                     <span t-field="doc.primeCEE" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>                    
                 </td>
             </tr>
-            <tr class="border-black">
-                <td t-att-style="style_fond"><strong>Reste à payer TTC</strong></td>
-                <td class="text-right" t-att-style="style_fond">
+            <tr class="border-black o_total">
+                <td><strong>Reste à payer TTC</strong></td>
+                <td class="text-right">
                     <span t-esc="reste_apayer" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                 </td>
             </tr>
@@ -364,21 +364,21 @@
             <t t-set="is_engie" t-value="True"/>
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
-                <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>
+                <t t-call="account.report_invoice_with_payments" t-lang="lang"/>
             </t>
         </t>
     </template>
     
-    <!-- <report -->
-        <!-- id="account_invoices_engie" -->
-        <!-- model="account.invoice" -->
-        <!-- string="Factures Engie" -->
-        <!-- report_type="qweb-pdf" -->
-        <!-- name="isoscop.report_invoice_with_payments_engie" -->
-        <!-- file="isoscop.report_invoice_with_payments_engie" -->
-        <!-- attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')" -->
-        <!-- print_report_name="(object._get_report_base_filename())"         -->
-    <!-- /> -->
+     <report
+         id="account_invoices_engie"
+         model="account.invoice"
+         string="Factures Engie"
+         report_type="qweb-pdf"
+         name="isoscop.report_invoice_with_payments_engie"
+         file="isoscop.report_invoice_with_payments_engie"
+         attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+         print_report_name="(object._get_report_base_filename())"
+     />
     
     <record id="account.account_invoices" model="ir.actions.report">
         <field name="name">Factures Engie</field>
