@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="isoscop_report_assets" inherit_id="web.report_assets_common">
-        <xpath expr="." position="inside">
-            <link href="/isoscop/static/src/scss/layout_boxed.scss" rel="stylesheet" type="text/scss"/>
-        </xpath>
-    </template>
-
-
     <template id="isoscop_report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//div[@t-field='doc.partner_id']" position="replace">            
             <div t-field="doc.partner_id" style="font-size:larger;" t-options='{"widget": "contact", "fields": ["address", "name", "phone", "mobile"], "no_marker": True, "phone_icons":true}' />
@@ -48,9 +41,9 @@
             <attribute name="class">row mt16 mb16</attribute>
         </xpath>
         
-        <xpath expr="//div[@id='informations']/div[6]" position="replace">
-            
-        </xpath>
+<!--        <xpath expr="//div[@id='informations']/div[6]" position="replace">-->
+<!--            -->
+<!--        </xpath>-->
 
         <xpath expr="//table[hasclass('table','table-sm','o_main_table')]" postion="before">
             <p>
@@ -66,15 +59,15 @@
             <div t-if="doc.company_id.id == 1" style="page-break-after: always;"></div>
         </xpath>
         
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[1]" position="attributes">
-            <attribute name="t-att-style">style_fond</attribute>
-        </xpath>
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[2]" position="attributes">
-            <attribute name="t-att-style">style_fond</attribute>
-        </xpath>
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[1]" position="attributes">-->
+<!--            <attribute name="t-att-style">style_fond</attribute>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]/tr[2]/td[2]" position="attributes">-->
+<!--            <attribute name="t-att-style">style_fond</attribute>-->
+<!--        </xpath>-->
         
         <xpath expr="//tr[hasclass('is-subtotal','text-right')]" position="attributes">
-            <attribute name="t-if">current_subtotal_tax_excluded > 0</attribute>
+            <attribute name="t-if">current_subtotal > 0</attribute>
         </xpath>
         
         <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]" position="inside">
@@ -92,9 +85,9 @@
                     <span t-field="doc.primeCEE" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>                    
                 </td>
             </tr>
-            <tr class="border-black o_total">
-                <td><strong>Reste à payer TTC</strong></td>
-                <td class="text-right">
+            <tr class="border-black">
+                <td t-att-style="style_fond"><strong>Reste à payer TTC</strong></td>
+                <td class="text-right" t-att-style="style_fond">
                     <span t-esc="reste_apayer" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                 </td>
             </tr>
@@ -105,7 +98,7 @@
             <p t-if="doc.company_id.id == 2">Les prix de nos devis sont valables 3 mois à compter de la date d'émission du devis, sauf accord particulier.</p>
         </xpath>
         
-        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="after">
+        <xpath expr="//p[@t-if='not is_html_empty(doc.payment_term_id.note)']" position="after">
             <div class="clearfix">
                 <div id="terms" class="col-xs-4" t-if="doc.order_terms" style="width:30%">
                     <table class="table table-sm">              
@@ -176,7 +169,7 @@
             </div>
         
         </xpath>
-        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="replace"></xpath>
+        <xpath expr="//span[@t-field='doc.payment_term_id.note']" position="replace"></xpath>
         
         
     </template>
@@ -184,9 +177,9 @@
     <template id="isoscop_report_invoice_document" inherit_id="account.report_invoice_document">        
         
         <xpath expr="//div[@id='informations']" postion="inside">
-            <div name="reglement" class="col-auto mw-100 mb-2" t-if="o.payment_term_id">
+            <div name="reglement" class="col-auto mw-100 mb-2" t-if="o.invoice_payment_term_id">
                 <strong>Mode de règlement:</strong> 
-                    <p class="m-0" t-field="o.payment_term_id.note"/>
+                    <p class="m-0" t-field="o.invoice_payment_term_id.note"/>
             </div>
             <div name="date_start_work" class="col-auto mw-100 mb-2" t-if="o.date_start_work">
                 <strong>Date début travaux:</strong> 
@@ -246,9 +239,9 @@
         
         <xpath expr="//p[@name='payment_term']" position="replace">
         </xpath>
-        <xpath expr="//p[@name='comment']" position="before">
+        <xpath expr="//div[@name='comment']" position="before">
                 <p>Escompte pour règlement anticipé : 0%</p>
-            </xpath>
+        </xpath>
         <xpath expr="//div[hasclass('page')]" position="inside">
             <cite>
             <p t-if="is_engie and o.company_id.id != 3">
@@ -260,10 +253,10 @@
             <div class="col-xs-6 pull-left" id="talon" style="border:1px dotted black;font-size:xx-small;page-break-inside: avoid;">
                 <strong>Talon à joindre à votre règlement</strong>
                 <div class="col-xs-5">
-                <p>DATE: <span t-field="o.date_invoice"/>
+                <p>DATE: <span t-field="o.invoice_date"/>
                 <br>CLIENT : <span t-field="o.partner_id"/></br>
-                <br>N°FACTURE : <span t-field="o.number"/></br>
-                <br>NET A PAYER : <span t-esc="o.residual - o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></br>
+                <br>N°FACTURE : <span t-field="o.name"/></br>
+                <br>NET A PAYER : <span t-esc="o.amount_residual - o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></br>
                 </p>
                 </div>
             </div>
@@ -280,26 +273,26 @@
         </xpath>
     </template> 
     
-    <template id="isoscop_report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">        
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//span[@t-field='o.residual']" position="replace">
-            <t t-set="reste_du" t-value="o.residual - o.primeCEE"/>
-            <span t-esc="reste_du"/>
-        </xpath>
+<!--    <template id="isoscop_report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">        -->
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//span[@t-field='o.residual']" position="replace">-->
+<!--            <t t-set="reste_du" t-value="o.residual - o.primeCEE"/>-->
+<!--            <span t-esc="reste_du"/>-->
+<!--        </xpath>-->
         
-        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//t[@t-set='payments_vals']" position="replace">
-            <t t-set="payments_vals" t-value="o._get_payments_vals_report()"/>
-        </xpath>
-    </template>
+<!--        <xpath expr="//div[@id='total']//table[hasclass('table','table-sm')]//t[@t-set='payments_vals']" position="replace">-->
+<!--            <t t-set="payments_vals" t-value="o._get_payments_vals_report()"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
 
     <template id="isoscop_external_layout_boxed" inherit_id="web.external_layout_boxed">
-        <xpath expr="//div[hasclass('header')]//div[hasclass('col-6')]" position="replace">
+        <xpath expr="//div[hasclass('o_boxed_header')]//div[hasclass('col-6')]" position="replace">
             <div class="col-5">
                 <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
             </div>
         </xpath>
-        <xpath expr="//div[hasclass('header')]//div[hasclass('col-6','text-right','mb4')]" position="replace">
+        <xpath expr="//div[hasclass('o_boxed_header')]//div[hasclass('col-6','text-right','mb4')]" position="replace">
             <div class="col-7 text-right mb4" >
-                <div class="col-xs-3 pull-left" style="padding-left:10px;width:280px;">
+                <div class="col-xs-3 pull-left" style="padding-left:10px;width:270px;">
                   <div class="col-xs-1 pull-left" style="width:80px;">
                       <img src="/isoscop/static/src/img/rge.jpg" style="display: block;"/>
                   </div>
@@ -314,16 +307,13 @@
                       </t>
                   </div>
                 </div>
-                <div class="col-xs-3 pull-right" style="width:180px;">
-                    <h4 class="mt0" t-field="company.report_header"/>
-                    <div name="company_address" class="mb4">
-                        <span class="company_address" t-field="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                <div class="col-xs-3 pull-right" style="width:190px;">
+                    <h4 class="mt0" t-field="company.report_header" style="color: red;"/>
+                    <div name="company_address" class="float-right mb4">
+                        <span t-if="company.company_details" t-field="company.company_details"/>
                     </div>
                 </div>
             </div>
-        </xpath>
-        <xpath expr="//div[hasclass('header')]//h4[hasclass('mt0')]" position="attributes">
-            <attribute name="style">color: red;</attribute>
         </xpath>
         
         <xpath expr="//div[@t-field='company.report_footer']" position="after">
@@ -343,42 +333,42 @@
         </t>
     </template>
     
-    <!-- <report  -->
-        <!-- id="sale_order_engie" -->
-        <!-- model="sale.order" -->
-        <!-- string="Devis / Commande Engie" -->
-        <!-- report_type="qweb-pdf" -->
-        <!-- name="isoscop.report_saleorder_engie" -->
-        <!-- file="isoscop.report_saleorder_engie"                 -->
-        <!-- print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s -%s' % (object.name, object.partner_id.name)) or 'Commande - %s -%s' % (object.name,object.partner_id.name)" -->
-    <!-- /> -->
-    
-    <record id="sale.action_report_saleorder" model="ir.actions.report">
-        <field name="name">Devis / Commande Engie</field>
-        <field name="report_name">isoscop.report_saleorder_engie</field>
-        <field name="report_file">isoscop.report_saleorder_engie</field>        
-    </record>
-    
-    <template id="report_invoice_with_payments_engie">
-        <t t-call="web.html_container">
-            <t t-set="is_engie" t-value="True"/>
-            <t t-foreach="docs" t-as="o">
-                <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
-                <t t-call="account.report_invoice_with_payments" t-lang="lang"/>
-            </t>
-        </t>
-    </template>
-    
      <report
-         id="account_invoices_engie"
-         model="account.invoice"
-         string="Factures Engie"
+         id="sale_order_engie"
+         model="sale.order"
+         string="Devis / Commande Engie"
          report_type="qweb-pdf"
-         name="isoscop.report_invoice_with_payments_engie"
-         file="isoscop.report_invoice_with_payments_engie"
-         attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
-         print_report_name="(object._get_report_base_filename())"
+         name="isoscop.report_saleorder_engie"
+         file="isoscop.report_saleorder_engie"
+         print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s -%s' % (object.name, object.partner_id.name)) or 'Commande - %s -%s' % (object.name,object.partner_id.name)"
      />
+    
+<!--    <record id="sale.action_report_saleorder" model="ir.actions.report">-->
+<!--        <field name="name">Devis / Commande Engie</field>-->
+<!--        <field name="report_name">isoscop.report_saleorder_engie</field>-->
+<!--        <field name="report_file">isoscop.report_saleorder_engie</field>        -->
+<!--    </record>-->
+<!--    -->
+<!--    <template id="report_invoice_with_payments_engie">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-set="is_engie" t-value="True"/>-->
+<!--            <t t-foreach="docs" t-as="o">-->
+<!--                <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>-->
+<!--                <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
+    
+    <!-- <report -->
+        <!-- id="account_invoices_engie" -->
+        <!-- model="account.invoice" -->
+        <!-- string="Factures Engie" -->
+        <!-- report_type="qweb-pdf" -->
+        <!-- name="isoscop.report_invoice_with_payments_engie" -->
+        <!-- file="isoscop.report_invoice_with_payments_engie" -->
+        <!-- attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')" -->
+        <!-- print_report_name="(object._get_report_base_filename())"         -->
+    <!-- /> -->
     
     <record id="account.account_invoices" model="ir.actions.report">
         <field name="name">Factures Engie</field>
