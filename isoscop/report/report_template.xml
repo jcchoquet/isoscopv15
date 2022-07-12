@@ -85,9 +85,9 @@
                     <span t-field="doc.primeCEE" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>                    
                 </td>
             </tr>
-            <tr class="border-black">
-                <td t-att-style="style_fond"><strong>Reste à payer TTC</strong></td>
-                <td class="text-right" t-att-style="style_fond">
+            <tr class="border-black o_total">
+                <td><strong>Reste à payer TTC</strong></td>
+                <td class="text-right">
                     <span t-esc="reste_apayer" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                 </td>
             </tr>
@@ -219,9 +219,9 @@
                     <span t-field="o.primeCEE" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                 </td>
             </tr>
-            <tr class="border-black">
-                <td t-att-style="style_fond"><strong>Reste à payer TTC</strong></td>
-                <td class="text-right" t-att-style="style_fond">
+            <tr class="border-black o_total">
+                <td><strong>Reste à payer TTC</strong></td>
+                <td class="text-right">
                     <span t-esc="reste_apayer" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                 </td>
             </tr>
